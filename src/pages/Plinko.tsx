@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '../components/ui'
-import { BallManager } from '../plinko/classes/BallManager'
-import { outcomes } from '../plinko/outcomes'
+import { BallManager } from '../game/plinko/classes/BallManager'
+import { outcomes } from '../game/plinko/outcomes'
 
 export function Plinko() {
 	const [ballManager, setBallManager] = useState<BallManager>()
