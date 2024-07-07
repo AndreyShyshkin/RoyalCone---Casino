@@ -1,4 +1,4 @@
-export const outcomes = {
+export const outcomes: { [key: number]: number[] } = {
 	'0': [],
 	'1': [3964963.452981615, 3910113.3998412564],
 	'2': [

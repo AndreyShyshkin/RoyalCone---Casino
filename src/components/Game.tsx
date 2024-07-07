@@ -4,9 +4,9 @@ import { outcomes } from '../game/outcomes'
 
 export function Game() {
 	const [ballManager, setBallManager] = useState<BallManager>()
-	const canvasRef = useRef<any>()
-	const TOTAL_DROPS = 16
-	const MULTIPLIERS: { [key: number]: number } = {
+	const canvasRef = useRef<HTMLCanvasElement>(null)
+	const totalDrops = 16
+	const multipliers: { [key: number]: number } = {
 		0: 16,
 		1: 9,
 		2: 2,
@@ -28,52 +28,29 @@ export function Game() {
 
 	useEffect(() => {
 		if (canvasRef.current) {
-			const ballManager = new BallManager(
-				canvasRef.current as unknown as HTMLCanvasElement
-			)
-			setBallManager(ballManager)
+			const manager = new BallManager(canvasRef.current)
+			setBallManager(manager)
 		}
 	}, [canvasRef])
 
+	const handleAddBallClick = () => {
+		const outcome = Math.floor(Math.random() * totalDrops)
+		const possibleOutcomes = outcomes[outcome]
+		if (ballManager && possibleOutcomes.length) {
+			const randomOutcome =
+				possibleOutcomes[Math.floor(Math.random() * possibleOutcomes.length)]
+			ballManager.addBall(randomOutcome)
+			console.log({
+				point: randomOutcome,
+				multiplier: multipliers[outcome],
+			})
+		}
+	}
+
 	return (
 		<div>
-			<canvas ref={canvasRef} width='800' height='800'></canvas>
-			<button
-				onClick={async () => {
-					// const response = await axios.post("http://localhost:3000/game", {data: 1});
-					let outcome = 0
-					const pattern = []
-					for (let i = 0; i < TOTAL_DROPS; i++) {
-						if (Math.random() > 0.5) {
-							pattern.push('R')
-							outcome++
-						} else {
-							pattern.push('L')
-						}
-					}
-
-					const multiplier = MULTIPLIERS[outcome]
-					// @ts-ignore
-					const possibleOutcomes = outcomes[outcome]
-					if (ballManager) {
-						ballManager.addBall(
-							possibleOutcomes[
-								Math.floor(Math.random() * possibleOutcomes.length || 0)
-							]
-						)
-						console.log({
-							point:
-								possibleOutcomes[
-									Math.floor(Math.random() * possibleOutcomes.length || 0)
-								],
-							pattern,
-							multiplier,
-						})
-					}
-				}}
-			>
-				Add ball
-			</button>
+			<canvas ref={canvasRef} width={800} height={800} />
+			<button onClick={handleAddBallClick}>Add ball</button>
 		</div>
 	)
 }
