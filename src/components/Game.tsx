@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { BallManager } from '../game/classes/BallManager'
-import { outcomes } from '../game/outcomes'
+import { BallManager } from '../plinko/classes/BallManager'
+import { outcomes } from '../plinko/outcomes'
 
 export function Game() {
 	const [ballManager, setBallManager] = useState<BallManager>()

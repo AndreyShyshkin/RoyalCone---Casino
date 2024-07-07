@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '../components/ui'
-import { BallManager } from '../game/classes/BallManager'
-import { outcomes } from '../game/outcomes'
+import { BallManager } from '../plinko/classes/BallManager'
+import { outcomes } from '../plinko/outcomes'
 
-export function Game() {
+export function Plinko() {
 	const [ballManager, setBallManager] = useState<BallManager>()
 	const canvasRef = useRef<any>()
 	const TOTAL_DROPS = 16
