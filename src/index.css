@@ -17,3 +17,33 @@
 	-moz-osx-font-smoothing: grayscale;
 	font-family: 'Times New Roman', Times, serif;
 }
+
+@media (max-width: 800px) {
+	canvas {
+		transform: scale(0.8);
+	}
+}
+
+@media (max-width: 600px) {
+	canvas {
+		transform: scale(0.7);
+	}
+}
+
+@media (max-width: 500px) {
+	canvas {
+		transform: scale(0.6);
+	}
+}
+
+@media (max-width: 400px) {
+	canvas {
+		transform: scale(0.5);
+	}
+}
+
+@media (max-width: 380px) {
+	canvas {
+		transform: scale(0.45);
+	}
+}
