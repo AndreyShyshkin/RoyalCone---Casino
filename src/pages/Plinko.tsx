@@ -38,7 +38,7 @@ export function Plinko() {
 
 	return (
 		<div className='flex flex-col lg:flex-row items-center justify-center'>
-			<canvas ref={canvasRef} width='800' height='800'></canvas>
+			<canvas id='plinko' ref={canvasRef} width='800' height='800'></canvas>
 			<Button
 				className='px-10 mb-4'
 				onClick={async () => {
