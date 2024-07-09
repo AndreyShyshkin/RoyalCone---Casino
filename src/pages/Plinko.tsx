@@ -5,6 +5,7 @@ import { outcomes } from '../game/plinko/outcomes'
 
 export function Plinko() {
 	const [ballManager, setBallManager] = useState<BallManager>()
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 	const canvasRef = useRef<any>()
 	const TOTAL_DROPS = 16
 	const MULTIPLIERS: { [key: number]: number } = {
@@ -34,47 +35,67 @@ export function Plinko() {
 			)
 			setBallManager(ballManager)
 		}
+
+		const handleResize = () => {
+			setWindowWidth(window.innerWidth)
+		}
+
+		window.addEventListener('resize', handleResize)
+
+		return () => {
+			window.removeEventListener('resize', handleResize)
+		}
 	}, [canvasRef])
 
-	return (
-		<div className='flex flex-col lg:flex-row items-center justify-center'>
-			<canvas id='plinko' ref={canvasRef} width='800' height='800'></canvas>
-			<Button
-				className='px-10 mb-4'
-				onClick={async () => {
-					let outcome = 0
-					const pattern = []
-					for (let i = 0; i < TOTAL_DROPS; i++) {
-						if (Math.random() > 0.5) {
-							pattern.push('R')
-							outcome++
-						} else {
-							pattern.push('L')
-						}
-					}
+	const addBall = () => {
+		let outcome = 0
+		const pattern = []
+		for (let i = 0; i < TOTAL_DROPS; i++) {
+			if (Math.random() > 0.5) {
+				pattern.push('R')
+				outcome++
+			} else {
+				pattern.push('L')
+			}
+		}
 
-					const multiplier = MULTIPLIERS[outcome]
-					// @ts-ignore
-					const possibleOutcomes = outcomes[outcome]
-					if (ballManager) {
-						ballManager.addBall(
-							possibleOutcomes[
-								Math.floor(Math.random() * possibleOutcomes.length || 0)
-							]
-						)
-						console.log({
-							point:
-								possibleOutcomes[
-									Math.floor(Math.random() * possibleOutcomes.length || 0)
-								],
-							pattern,
-							multiplier,
-						})
-					}
-				}}
-			>
-				Add ball
-			</Button>
+		const multiplier = MULTIPLIERS[outcome]
+		// @ts-ignore
+		const possibleOutcomes = outcomes[outcome]
+		if (ballManager) {
+			ballManager.addBall(
+				possibleOutcomes[
+					Math.floor(Math.random() * possibleOutcomes.length || 0)
+				]
+			)
+			console.log({
+				point:
+					possibleOutcomes[
+						Math.floor(Math.random() * possibleOutcomes.length || 0)
+					],
+				pattern,
+				multiplier,
+			})
+		}
+	}
+
+	return (
+		<div
+			className='flex flex-col lg:flex-row items-center justify-center'
+			style={{ overflow: 'hidden' }}
+		>
+			<canvas
+				id='plinko'
+				ref={canvasRef}
+				width='800'
+				height='800'
+				onClick={() => windowWidth < 800 && addBall()}
+			></canvas>
+			{windowWidth >= 800 && (
+				<Button className='px-10 mb-4' onClick={addBall}>
+					Add ball
+				</Button>
+			)}
 		</div>
 	)
 }

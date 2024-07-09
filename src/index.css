@@ -18,32 +18,36 @@
 	font-family: 'Times New Roman', Times, serif;
 }
 
-@media (max-width: 800px) {
+canvas {
+	margin: -50px;
+}
+
+@media (max-width: 650px) {
 	canvas {
 		transform: scale(0.8);
 	}
 }
 
-@media (max-width: 600px) {
+@media (max-width: 550px) {
 	canvas {
 		transform: scale(0.7);
 	}
 }
 
-@media (max-width: 500px) {
+@media (max-width: 480px) {
+	canvas {
+		transform: scale(0.65);
+	}
+}
+
+@media (max-width: 420px) {
 	canvas {
 		transform: scale(0.6);
 	}
 }
 
-@media (max-width: 400px) {
-	canvas {
-		transform: scale(0.5);
-	}
-}
-
 @media (max-width: 380px) {
 	canvas {
-		transform: scale(0.45);
+		transform: scale(0.5);
 	}
 }
