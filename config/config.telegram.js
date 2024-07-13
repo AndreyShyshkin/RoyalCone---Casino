@@ -6,7 +6,6 @@ dotenv.config()
 
 // Use process.env to access environment variables
 const token = process.env.TELEGRAM_token
-const webAppUrl = 'http://192.168.1.135:5173/'
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true })
 

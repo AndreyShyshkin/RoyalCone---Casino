@@ -89,10 +89,17 @@ export function Plinko() {
 				ref={canvasRef}
 				width='800'
 				height='800'
-				onClick={() => windowWidth < 800 && addBall()}
+				onClick={() => {
+					windowWidth < 800 && addBall()
+				}}
 			></canvas>
 			{windowWidth >= 800 && (
-				<Button className='px-10 mb-4' onClick={addBall}>
+				<Button
+					className='px-10 mb-4'
+					onClick={() => {
+						addBall()
+					}}
+				>
 					Add ball
 				</Button>
 			)}

@@ -5,14 +5,14 @@ import { pad, unpad } from '../padding'
 export class Ball {
 	private x: number
 	private y: number
-	private radius: number
-	private color: string
+	private readonly radius: number
+	private readonly color: string
 	private vx: number
 	private vy: number
 	private ctx: CanvasRenderingContext2D
 	private obstacles: Obstacle[]
-	private sinks: Sink[]
-	private onFinish: (index: number) => void
+	private readonly sinks: Sink[]
+	private readonly onFinish: (index: number) => void
 
 	constructor(
 		x: number,

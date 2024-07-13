@@ -4,6 +4,7 @@ import {
 	WIDTH,
 	obstacleRadius,
 	sinkWidth,
+	sinkHeight
 } from './constants'
 import { pad } from './padding'
 
@@ -46,7 +47,7 @@ export const createObstacles = (): Obstacle[] => {
 	const rows = 18
 	for (let row = 2; row < rows; row++) {
 		const numObstacles = row + 1
-		const y = 0 + row * 35
+		const y = row * 35
 		const spacing = 36
 		for (let col = 0; col < numObstacles; col++) {
 			const x = WIDTH / 2 - spacing * (row / 2 - col)
@@ -65,7 +66,7 @@ export const createSinks = (): Sink[] => {
 			WIDTH / 2 + sinkWidth * (i - Math.floor(NUM_SINKS / 2)) - SPACING * 1.5
 		const y = HEIGHT - 170
 		const width = sinkWidth
-		const height = width
+		const height = sinkHeight
 		sinks.push({ x, y, width, height, multiplier: MULTIPLIERS[i + 1] })
 	}
 
